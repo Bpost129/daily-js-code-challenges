@@ -34,8 +34,9 @@ addOne(-5) //=> -4
 -----------------------------------------------------------------------------*/
 // Your solution for 01-addOne here:
 
-
-
+function addOne(num) {
+  return num += 1
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -58,8 +59,12 @@ addTwoNumbers('Hello', 5) //=> NaN
 -----------------------------------------------------------------------------*/
 // Your solution for 02-addTwoNumbers here:
 
-
-
+function addTwoNumbers(num1, num2) {
+  if (typeof(num1) !== 'number' || typeof(num2) !== 'number') {
+    return NaN
+  }
+  return num1 + num2
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -82,7 +87,17 @@ sumNumbers([]) //=> 0
 -----------------------------------------------------------------------------*/
 // Your solution for 03-sumNumbers here:
 
+function sumNumbers(numArr) {
+  if (!numArr) return 0
 
+  let sum = 0
+
+  for (let i = 0; i < numArr.length; i++) {
+    sum += numArr[i]
+  }
+
+  return sum
+}
 
 
 
@@ -106,7 +121,17 @@ addList(7,-12) //=> -5
 -----------------------------------------------------------------------------*/
 // Your solution for 04-addList here:
 
+function addList(...nums) {
+  if (!nums) return 0
 
+  let sum = 0
+
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i]
+  }
+
+  return sum
+}
 
 
 
@@ -133,7 +158,11 @@ computeRemainder(10.5, 3) //=> 1.5
 -----------------------------------------------------------------------------*/
 // Your solution for 05-computeRemainder:
 
+function computeRemainder(num1, num2) {
+  if (num2 === 0) return Infinity
 
+  return num1 % num2
+}
 
 
 
@@ -160,7 +189,23 @@ range(5,2) //=> "First argument must be less than second"
 -----------------------------------------------------------------------------*/
 // Your solution for 06-range here:
 
+function range(num1, num2) {
+  if (num1 > num2) {
+    return "First argument must be less than second"
+  } else if (num1 === num2) {
+    return []
+  } else {
+    let arr = [num1]
+    let idx = num1 + 1
 
+    while (idx < num2 - 1) {
+      arr.push(idx)
+      idx++
+    }
+  }
+
+  return arr
+}
 
 
 
@@ -181,7 +226,9 @@ reverseUpcaseString("SEI Rocks!") //=> "!SKCOR IES"
 -----------------------------------------------------------------------------*/
 // Your solution for 07-reverseUpcaseString here:
 
-
+function reverseUpcaseString(str) {
+  return str.split('').reverse().join('').toUpperCase()
+}
 
 
 
@@ -204,7 +251,15 @@ removeEnds('a') //=> "" (empty string)
 // Your solution for 08-removeEnds here:
 
 
+function removeEnds(str) {
+  if (str.length < 3) return ''
 
+  str = str.split('')
+  str.shift()
+  str.pop()
+
+  return str.join('')
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -245,7 +300,21 @@ charCount('Today is fantastic!')
 -----------------------------------------------------------------------------*/
 // Your solution for 09-charCount here:
 
+function charCount(str) {
+  let obj = {}
+  str = str.split('')
 
+  for (let i = 0; i < str.length; i++) {
+    let idx = str[i]
+    if (!obj[idx]) {
+      obj[idx] = 1
+    } else {
+      obj[idx] += 1
+    }
+  }
+
+  return obj
+}
 
 
 
@@ -275,7 +344,16 @@ formatWithPadding(1234, '*', 3) //=> "1234"
 -----------------------------------------------------------------------------*/
 // Your solution for 10-formatWithPadding here:
 
+function formatWithPadding(num1, str, num2) {
+  let nums = num1.split('')
+  if (nums.length > num2) return num1
+  
+  for (let i = 0; i < num2; i++) {
+    nums.unshift(str)
+  }
 
+  return nums.join('')
+}
 
 
 
