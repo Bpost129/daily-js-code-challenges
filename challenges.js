@@ -190,17 +190,15 @@ range(5,2) //=> "First argument must be less than second"
 // Your solution for 06-range here:
 
 function range(num1, num2) {
+  let arr = []
+
   if (num1 > num2) {
     return "First argument must be less than second"
   } else if (num1 === num2) {
-    return []
+    return arr
   } else {
-    let arr = [num1]
-    let idx = num1 + 1
-
-    while (idx < num2 - 1) {
-      arr.push(idx)
-      idx++
+    for (let i = num1; i < num2; i++) {
+      arr.push(i)
     }
   }
 
@@ -346,14 +344,15 @@ formatWithPadding(1234, '*', 3) //=> "1234"
 
 function formatWithPadding(num1, str, num2) {
   let nums = num1.toString().split('')
-  if (nums.length > num2) return num1
-  
-  for (let i = 0; i < num2; i++) {
-    if (nums.length < num2) {
-      nums.unshift(str)
+  if (nums.length >= num2) {
+    return num1
+  } else {
+    let padding = num2 - nums.length
+    for (let i = 1; i <= padding; i++) {
+        nums.unshift(str)
     }
   }
-
+  
   return nums.join('')
 }
 
@@ -383,21 +382,11 @@ isPalindrome('') //=> true
 // Your solution for 11-isPalindrome here:
 
 function isPalindrome(str) {
-  str = str.split('')
   if (str.length <= 1) return true
-  let split = Math.floor((str.length) / 2)
-  let half1 = str.splice(0, split)
-  let half2 = str.reverse()
 
-  half1.map(el => el !== ' ')
-  half2.map(el => el !== ' ')
-  //map not working
+  let newStr = str.toLowerCase().split(' ').join('')
 
-  // console.log(half1)
-  // console.log(half2)
-  if (half1 == half2) return true
-
-  return false
+  return newStr === newStr.split('').reverse().join('')
 
 }
 
@@ -736,22 +725,15 @@ isPrime(200) //=> false
 
 
 function isPrime(num) {
-  let prime = false
-
   if (num <= 1) return false
 
   for (let i = 2; i < num; i++) {
     if (num % i === 0) {
-      prime = true
+      return false
     }
   }
 
-  if (prime) {
-    return false
-  } else {
-    return true
-  }
-  
+  return true
 }
 
 
