@@ -345,16 +345,17 @@ formatWithPadding(1234, '*', 3) //=> "1234"
 // Your solution for 10-formatWithPadding here:
 
 function formatWithPadding(num1, str, num2) {
-  let nums = num1.split('')
+  let nums = num1.toString().split('')
   if (nums.length > num2) return num1
   
   for (let i = 0; i < num2; i++) {
-    nums.unshift(str)
+    if (nums.length < num2) {
+      nums.unshift(str)
+    }
   }
 
   return nums.join('')
 }
-
 
 
 /*-----------------------------------------------------------------------------
@@ -381,7 +382,24 @@ isPalindrome('') //=> true
 -----------------------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
 
+function isPalindrome(str) {
+  str = str.split('')
+  if (str.length <= 1) return true
+  let split = Math.floor((str.length) / 2)
+  let half1 = str.splice(0, split)
+  let half2 = str.reverse()
 
+  half1.map(el => el !== ' ')
+  half2.map(el => el !== ' ')
+  //map not working
+
+  // console.log(half1)
+  // console.log(half2)
+  if (half1 == half2) return true
+
+  return false
+
+}
 
 
 
@@ -411,7 +429,16 @@ hammingDistance('abc', 'ab') //=> NaN
 -----------------------------------------------------------------------------*/
 // Your solution for 12-hammingDistance here:
 
+function hammingDistance(str1, str2) {
+  if (str1.length !== str2.length) return NaN
+  let count = 0
 
+  for (let i = 0; i < str1.length; i++) {
+    if (str1[i] !== str2[i]) count++
+  }
+
+  return count
+}
 
 
 
@@ -438,7 +465,13 @@ mumble('!A 2') //=> '!-AA-   -2222'
 -----------------------------------------------------------------------------*/
 // Your solution for 13-mumble here:
 
+function mumble(str) {
+  if (str.length <= 1) return str
 
+  for (let i = 1; i < str.length; i++) {
+
+  }
+}
 
 
 
@@ -463,7 +496,17 @@ fromPairs([ ['name', 'Sam"], ['age', 24], ['name', 'Sally'] ]) //=> { name: "Sal
 -----------------------------------------------------------------------------*/
 // Your solution for 14-fromPairs here:
 
+function fromPairs(arr) {
+  let obj = {}
 
+  for (let i = 0; i < arr.length; i++) {
+    let subarr = arr[i]
+    let j = 0
+    obj[subarr[j]] = subarr[j+1]
+  }
+
+  return obj
+}
 
 
 
@@ -494,7 +537,21 @@ mergeObjects({a: 1, b: 2, c: 3}, {d: 4}, {b: 22, d: 44})
 -----------------------------------------------------------------------------*/
 // Your solution for 15-mergeObjects here:
 
+function mergeObjects(...objs) {
+  let obj1 = objs.shift()
 
+  let i = 0
+  while (i < objs.length) {
+    for (let j = 0; j < objs[i].length; j++) {
+      let subarr = objs[i][j]
+      let k = 0
+      obj1[subarr[k]] = subarr[k+1]
+    }
+    i++
+  }
+
+  return obj1
+}
 
 
 
@@ -536,7 +593,17 @@ findHighestPriced([
 -----------------------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
 
+function findHighestPriced(objs) {
+  let high = objs[0]
 
+  for (let i = 1; i < objs.length; i++) {
+    if (objs[i].price > high.price) {
+      high = objs[i]
+    }
+  }
+
+  return high
+}
 
 
 
@@ -574,7 +641,15 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 -----------------------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
 
+function mapArray(arr, cb) {
+  let newArr = []
 
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(cb(arr[i], i))
+  }
+
+  return newArr
+}
 
 
 
@@ -625,7 +700,15 @@ reduceArray( ['Yes', 'No', 'Yes', 'Maybe'], function(acc, v) {
 -----------------------------------------------------------------------------*/
 // Your solution for 18-reduceArray here:
 
+function reduceArray(arr, cb, val) {
+  let result = cb(val, arr[0], 0)
+  
+  for (let i = 1; i < arr.length; i++) {
+    result = cb(result, arr[i], i)
+  }
 
+  return result
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -652,7 +735,24 @@ isPrime(200) //=> false
 // Your solution for 19-isPrime here:
 
 
+function isPrime(num) {
+  let prime = false
 
+  if (num <= 1) return false
+
+  for (let i = 2; i < num; i++) {
+    if (num % i === 0) {
+      prime = true
+    }
+  }
+
+  if (prime) {
+    return false
+  } else {
+    return true
+  }
+  
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -680,7 +780,21 @@ intersection([1, 'a', true, 1, 1], [true, 1, 'b', 1]) //=> [1, true, 1]
 -----------------------------------------------------------------------------*/
 // Your solution for 20-intersection here:
 
+function intersection(arr1, arr2) {
+  let result = []
 
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] === arr2[j]) {
+        if (!result.includes(arr2[j])){
+          result.push(arr2[j])
+        }
+      }
+    }
+  }
+
+  return result
+}
 
 
 
